@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sale Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .info {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f5f5f5;
+        }
+        .total {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Sale Confirmation</h2>
+        </div>
+        
+        <div class="info">
+            <p><strong>Invoice Number:</strong> <span th:text="${sale.invoiceNumber}"></span></p>
+            <p><strong>Date:</strong> <span th:text="${#temporals.format(sale.createdAt, 'dd/MM/yyyy HH:mm')}"></span></p>
+            <p><strong>Customer:</strong> <span th:text="${sale.customerName}"></span></p>
+            <p><strong>Phone:</strong> <span th:text="${sale.customerPhone}"></span></p>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.medicine.name}"></td>
+                    <td th:text="${item.quantity}"></td>
+                    <td th:text="${item.unitPrice}"></td>
+                    <td th:text="${item.totalPrice}"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="total">
+            <p>Subtotal: <span th:text="${sale.totalAmount}"></span></p>
+            <p>Discount: <span th:text="${sale.discount}"></span></p>
+            <p>Final Amount: <span th:text="${sale.finalAmount}"></span></p>
+        </div>
+        
+        <p>Thank you for your purchase!</p>
+        
+        <div class="footer">
+            <p>This is an automated message from MyPharma System.</p>
+        </div>
+    </div>
+</body>
+</html> 

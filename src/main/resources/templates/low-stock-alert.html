@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Low Stock Alert</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f5f5f5;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Low Stock Alert</h2>
+        </div>
+        
+        <p>The following medicines are running low on stock:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Current Stock</th>
+                    <th>Batch Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="medicine : ${medicines}">
+                    <td th:text="${medicine.name}"></td>
+                    <td th:text="${medicine.category}"></td>
+                    <td th:text="${medicine.quantity}"></td>
+                    <td th:text="${medicine.batchNumber}"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p>Please take necessary action to replenish the stock.</p>
+        
+        <div class="footer">
+            <p>This is an automated message from MyPharma System.</p>
+        </div>
+    </div>
+</body>
+</html> 
